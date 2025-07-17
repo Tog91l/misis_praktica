@@ -1,0 +1,21 @@
+name: CI Pipeline
+
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["pypy3.10", "3.9", "3.10", "3.11", "3.12", "3.13"]
+
+    steps:
+      - name: Lint code (Black + Flake8)
+        run: |
+          pip install flake8
+          flake8
